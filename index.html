@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Tree Example</title>
+
+    <style>
+	
+	.node {
+		cursor: pointer;
+	}
+
+	.node circle {
+	  fill: #fff;
+	  stroke: steelblue;
+	  stroke-width: 3px;
+	}
+
+	.node text {
+	  font: 12px sans-serif;
+	}
+
+	.link {
+	  fill: none;
+	  stroke: #ccc;
+	  stroke-width: 2px;
+	}
+	
+    </style>
+
+  </head>
+
+  <body>
+
+<!-- load the d3.js library -->	
+<script src="http://d3js.org/d3.v3.min.js"></script>
+	
+<script>
+
+var treeData = [  
+  {  
+    "name":"Logstash",
+    "parent":"null",
+    "_children":[  
+      {
+        "name":"5044",
+        "parent":"Logstash",
+		"_children":[  
+          {  
+            "name":"0006_input_beats.conf",
+            "parent":"5044",
+			"_children":[  
+              {  
+                "name":"9500_output_beats.conf",
+                "parent":"0006_input_beats.conf"
+              }
+            ]
+          }
+        ]
+	  },
+	  {  
+        "name":"6050",
+        "parent":"Logstash",
+        "_children":[  
+          {  
+            "name":"0000_syslogng.conf",
+            "parent":"Inputs",
+            "_children":[  
+              {  
+                "name":"1000_preprocess_log_elapsed.conf",
+                "parent":"0000_syslogng.conf",
+                "_children":[  
+                  {  
+                    "name":"1001_preprocess_syslogng.conf",
+                    "parent":"1000_preprocess_log_elapsed.conf",
+                    "_children":[  
+                      {  
+                        "name":"1034_preprocess_syslog.conf",
+                        "parent":"1001_preprocess_syslogng.conf"
+                      },
+                      {  
+                        "name":"1033_preprocess_snort.conf",
+                        "parent":"1001_preprocess_syslogng.conf"
+                      },
+                      {  
+                        "name":"1003_preprocess_bro.conf",
+                        "parent":"1001_preprocess_syslogng.conf",
+                        "_children":[  
+                          {  
+                            "name":"1100_preprocess_bro_conn.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1100_preprocess_bro_conn.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1101_preprocess_bro_dhcp.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1101_preprocess_bro_dhcp.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1102_preprocess_bro_dns.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1102_preprocess_bro_dns.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1103_preprocess_bro_dpd.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1103_preprocess_bro_dpd.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1104_preprocess_bro_files.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1104_preprocess_bro_files.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+                                    "_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1105_preprocess_bro_ftp.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1105_preprocess_bro_ftp.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1106_preprocess_bro_http.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1106_preprocess_bro_http.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1107_preprocess_bro_irc.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1107_preprocess_bro_irc.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1108_preprocess_bro_kerberos.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1108_preprocess_bro_kerberos.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1109_preprocess_bro_notice.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1109_preprocess_bro_notice.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1110_preprocess_bro_rdp.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1110_preprocess_bro_rdp.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1111_preprocess_bro_signatures.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1111_preprocess_bro_signatures.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1112_preprocess_bro_smtp.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1112_preprocess_bro_smtp.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1113_preprocess_bro_snmp.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1113_preprocess_bro_snmp.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1114_preprocess_bro_software.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1114_preprocess_bro_software.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1115_preprocess_bro_ssh.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1115_preprocess_bro_ssh.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1116_preprocess_bro_ssl.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1116_preprocess_bro_ssl.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1117_preprocess_bro_syslog.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1117_preprocess_bro_syslog.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1118_preprocess_bro_tunnel.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1118_preprocess_bro_tunnel.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1119_preprocess_bro_weird.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1119_preprocess_bro_weird.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1121_preprocess_bro_mysql.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1121_preprocess_bro_mysql.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1122_preprocess_bro_socks.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1122_preprocess_bro_socks.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1123_preprocess_bro_x509.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1123_preprocess_bro_x509.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1124_preprocess_bro_intel.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1124_preprocess_bro_intel.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1125_preprocess_bro_modbus.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1125_preprocess_bro_modbus.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1126_preprocess_bro_sip.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1126_preprocess_bro_sip.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1127_preprocess_bro_radius.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1127_preprocess_bro_radius.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1128_preprocess_bro_pe.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1128_preprocess_bro_pe.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1129_preprocess_bro_rfb.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1129_preprocess_bro_rfb.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1130_preprocess_bro_dnp3.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1130_preprocess_bro_dnp3.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1131_preprocess_bro_smb_files.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1131_preprocess_bro_smb_files.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1132_preprocess_bro_smb_mapping.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1132_preprocess_bro_smb_mapping.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1133_preprocess_bro_ntlm.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1133_preprocess_bro_ntlm.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {  
+                            "name":"1134_preprocess_bro_dce_rpc.conf",
+                            "parent":"1003_preprocess_bro.conf",
+                            "_children":[  
+                              {  
+                                "name":"6000_bro.conf",
+                                "parent":"1134_preprocess_bro_rpc.conf",
+                                "_children":[  
+                                  {  
+                                    "name":"8001_postprocess_common_ip_augmentation.conf",
+                                    "parent":"6000_bro.conf",
+									"_children":[  
+                                      {  
+                                        "name":"9000_output_bro.conf",
+                                        "parent":"8001_postprocess_common_ip_augmentation.conf"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+					  {
+					    "name":"6500_ossec.conf",
+                        "parent":"1001_preprocess_syslogng.conf",
+						"_children":[  
+						  {  
+							"name":"6501_ossec_sysmon.conf",
+                            "parent":"6500_ossec.conf",
+                            "_children":[
+							  {  
+                                "name":"9034_output_syslog.conf",
+                                "parent":"6501_ossec_sysmon.conf"
+                              }
+							]
+						  },
+						  {  
+							"name":"6502_ossec_autoruns.conf",
+                            "parent":"6500_ossec.conf",
+                            "_children":[
+							  {  
+                                "name":"9034_output_syslog.conf",
+                                "parent":"6502_ossec_autruns.conf"
+                              }
+							]
+						  },
+						  {  
+                            "name":"9034_output_syslog.conf",
+                            "parent":"6500_ossec.conf"
+                          }
+                        ]
+					  }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {  
+            "name":"0001_input_json.conf",
+            "parent":"Inputs"
+          },
+          {  
+            "name":"0002_input_windows_json.conf",
+            "parent":"Inputs"
+          },
+          {  
+            "name":"0003_input_syslog.conf",
+            "parent":"Inputs"
+          },
+          {  
+            "name":"0005_input_suricata.conf",
+            "parent":"Inputs"
+          },
+          {  
+            "name":"0007_input_import.conf",
+            "parent":"Inputs"
+          }
+        ]
+      }
+    ]
+  }
+];
+
+
+// ************** Generate the tree diagram	 *****************
+var margin = {top: 20, right: 120, bottom: 20, left: 120},
+	width = 10000 - margin.right - margin.left,
+	height = 800 - margin.top - margin.bottom;
+	
+var i = 0,
+	duration = 750,
+	root;
+
+var tree = d3.layout.tree()
+	.size([height, width]);
+
+var diagonal = d3.svg.diagonal()
+	.projection(function(d) { return [d.y, d.x]; });
+
+var svg = d3.select("body").append("svg")
+	.attr("width", width + margin.right + margin.left)
+	.attr("height", height + margin.top + margin.bottom)
+  .append("g")
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+root = treeData[0];
+root.x0 = height / 2;
+root.y0 = 0;
+  
+update(root);
+
+d3.select(self.frameElement).style("height", "500px");
+
+function update(source) {
+
+  // Compute the new tree layout.
+  
+  var nodes = tree.nodes(root).reverse(),
+  links = tree.links(nodes);
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 300; });
+
+  // Update the nodes…
+  var node = svg.selectAll("g.node")
+	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("g")
+	  .attr("class", "node")
+	  .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+	  .on("click", click);
+
+  nodeEnter.append("circle")
+	  .attr("r", 1e-6)
+	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeEnter.append("text")
+	  .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
+	  .attr("dy", ".35em")
+	  .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+	  .text(function(d) { return d.name; })
+	  .style("fill-opacity", 1e-6);
+
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+	  .duration(duration)
+	  .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+	  .attr("r", 10)
+	  .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeUpdate.select("text")
+	  .style("fill-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+	  .duration(duration)
+	  .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+	  .remove();
+
+  nodeExit.select("circle")
+	  .attr("r", 1e-6);
+
+  nodeExit.select("text")
+	  .style("fill-opacity", 1e-6);
+
+  // Update the links…
+  var link = svg.selectAll("path.link")
+	  .data(links, function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("path", "g")
+	  .attr("class", "link")
+	  .attr("d", function(d) {
+		var o = {x: source.x0, y: source.y0};
+		return diagonal({source: o, target: o});
+	  });
+
+  // Transition links to their new position.
+  link.transition()
+	  .duration(duration)
+	  .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+	  .duration(duration)
+	  .attr("d", function(d) {
+		var o = {x: source.x, y: source.y};
+		return diagonal({source: o, target: o});
+	  })
+	  .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+	d.x0 = d.x;
+	d.y0 = d.y;
+  });
+}
+
+// Toggle children on click.
+function click(d) {
+  if (d.children) {
+	d._children = d.children;
+	d.children = null;
+  } else {
+	d.children = d._children;
+	d._children = null;
+  }
+  update(d);
+}
+
+</script>
+	
+  </body>
+</html>
