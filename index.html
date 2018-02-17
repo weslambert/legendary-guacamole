@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>SO on Elastic Pipeline</title>
+    <title>Tree Example</title>
 
     <style>
 	
@@ -44,7 +44,7 @@ var treeData = [
     "parent":"null",
     "_children":[  
       {
-        "name":"5044",
+        "name":"5044 - Beats",
         "parent":"Logstash",
 		"_children":[  
           {  
@@ -60,7 +60,7 @@ var treeData = [
         ]
 	  },
 	  {  
-        "name":"6050",
+        "name":"6050 - Standard",
         "parent":"Logstash",
         "_children":[  
           {  
@@ -874,10 +874,6 @@ var treeData = [
             ]
           },
           {  
-            "name":"0001_input_json.conf",
-            "parent":"Inputs"
-          },
-          {  
             "name":"0002_input_windows_json.conf",
             "parent":"Inputs"
           },
@@ -894,7 +890,27 @@ var treeData = [
             "parent":"Inputs"
           }
         ]
-      }
+      },
+	  {
+	    "name":"6051 - JSON",
+        "parent":"Logstash",
+		"_children":[  
+          {  
+            "name":"0001_input_json.conf",
+            "parent":"5044"
+          }
+        ]
+	  },
+	  {
+	    "name":"6052 - Windows JSON",
+        "parent":"Logstash",
+		"_children":[  
+          {  
+            "name":"0002_windows_json.conf",
+            "parent":"5044"
+          }
+        ]
+	  }
     ]
   }
 ];
